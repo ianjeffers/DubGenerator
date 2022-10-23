@@ -21,7 +21,7 @@ def SpeakText(command):
 # Loop infinitely for user to
 # speak
 
-
+language = input("Please enter a language: \n")
 
 while (1):
     # Exception handling to handle
@@ -43,11 +43,11 @@ while (1):
             recorded_text = r.recognize_google(audio2)
             recorded_text = recorded_text.lower()
             print("Recorded text:\n",recorded_text)
-            translated_text = translator.translate(recorded_text, src='en', dest=language)
+            translated_text = translator.translate(recorded_text, src='en', dest=language).text
             print("Translated text:\n", translated_text)
 
-            myobj = gTTS(text=recorded_text, lang='de', slow=False)
-            myobj.save("TestGerman.mp3")
+            myobj = gTTS(text=translated_text, lang='de', slow=False)
+            myobj.save("Test" + language + ".mp3")
 
     except sr.RequestError as e:
         print("Could not request results; {0}".format(e))
